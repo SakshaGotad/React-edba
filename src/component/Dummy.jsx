@@ -18,7 +18,7 @@ const Dummy = () => {
     } 
     setProduct(data);
     setLoading(false);
-  } 
+  }  
 
   
   return (

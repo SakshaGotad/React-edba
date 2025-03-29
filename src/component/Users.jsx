@@ -4,8 +4,8 @@ import { useParams } from 'react-router-dom'
 const Users = () => {
 
   const [product , setProduct] = useState();
-  const [loading , setLoading]=useState(true);
-
+  const [loading, setLoading]=useState(true);
+  
 
 
 useEffect(()=>{
@@ -27,9 +27,28 @@ useEffect(()=>{
   const {id} = useParams();
     
   return (
-    <div>
-      user {id}
+    <>
+    <div className='prod-containe'>
+      {
+        loading ? <>loading</>:
+        product.map((el, index)=> (
+          <div className='card'>
+          <img src={el.image} width={200} height={200} />
+
+            <div key={index}>
+           {el.title}
+           
+          </div>
+          <div > {
+              el.price
+             }</div>
+              <div className='button'> Buy  </div>
+          </div>
+        ))
+      }
     </div>
+     {}
+    </>
   )
 }
 
