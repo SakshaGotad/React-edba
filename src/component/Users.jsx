@@ -1,35 +1,37 @@
 import React, { useEffect, useState } from 'react'
-import './dummy.css';
-const Dummy = () => {
+import { useParams } from 'react-router-dom'
 
-  const [product , setProduct] =useState();
-  const [loading , setLoading] = useState(true);
-  useEffect(()=>{
- fetchData();
-  },[])
+const Users = () => {
+
+  const [product , setProduct] = useState();
+  const [loading, setLoading]=useState(true);
+  
 
 
+useEffect(()=>{
+  fetchData();
+},[])
+  
   const fetchData = async()=>{
     setLoading(true)
-    const response = await fetch('https://fakestoreapi.com/products');
+    const response = await fetch(`https://fakestoreapi.com/products/${id}`);
     const data = await response.json();
     if(data.success== 200){
       console.log(data.data);
     } 
     setProduct(data);
     setLoading(false);
-  }  
+  } 
 
-  
+
+  const {id} = useParams();
+    
   return (
     <>
-    <div className='dummy-container'>
-
-    {
-        loading? <> loading </>:
-        product.map((el,index)=>(
-        
-           
+    <div className='prod-containe'>
+      {
+        loading ? <>loading</>:
+        product.map((el, index)=> (
           <div className='card'>
           <img src={el.image} width={200} height={200} />
 
@@ -42,19 +44,12 @@ const Dummy = () => {
              }</div>
               <div className='button'> Buy  </div>
           </div>
-          
-          
-           
-            )
-        )
-        
+        ))
       }
-     
-      
     </div>
-     
+     {}
     </>
   )
 }
 
-export default Dummy
+export default Users
